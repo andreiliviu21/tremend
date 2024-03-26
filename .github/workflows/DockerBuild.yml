@@ -10,16 +10,20 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - uses: actions/checkout@v2
+    - uses: actions/checkout@v2
 
-      - name: Build the Docker image
-        run: docker build . --file Dockerfile --tag andreiliviu4/tremend_2024:${{ github.sha }}
+    - name: Set up Docker Buildx
+      uses: docker/setup-buildx-action@v1
 
-      - name: Log in to Docker Hub
-        uses: docker/login-action@v1
-        with:
-          username: ${{ secrets.DOCKER_USERNAME }}
-          password: ${{ secrets.DOCKER_PASSWORD }}
+    - name: Log in to Docker Hub
+      uses: docker/login-action@v1
+      with:
+        username: ${{ secrets.DOCKER_USERNAME }}
+        password: ${{ secrets.DOCKER_PASSWORD }}
 
-      - name: Push the Docker image
-        run: docker ${{ secrets.DOCKER_USERNAME }}/tremend:${{ github.sha }}
+    - name: Build and push
+      uses: docker/build-push-action@v2
+      with:
+        context: ./Ex2
+        file: ./Ex2/Dockerfile
+        tags: andreiliviu4/tremend_2024:c46d206e5206a4756e0972572a09a125af20c40d
