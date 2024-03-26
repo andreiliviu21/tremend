@@ -22,4 +22,4 @@ jobs:
           password: ${{ secrets.DOCKER_PASSWORD }}
 
       - name: Push the Docker image
-        run: docker push my-username/my-python-app:${{ github.sha }}
+        run: docker ${{ secrets.DOCKER_USERNAME }}/tremend:${{ github.sha }}
