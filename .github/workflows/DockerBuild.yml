@@ -26,4 +26,4 @@ jobs:
       with:
         context: ./Ex2
         file: ./Ex2/Dockerfile
-        tags: andreiliviu4/tremend_2024:c46d206e5206a4756e0972572a09a125af20c40d
+        tags: andreiliviu4/tremend_2024:${{ github.sha }}
